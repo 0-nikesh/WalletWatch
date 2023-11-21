@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:walletwatch/main.dart';
 
 class MyTextField extends StatelessWidget {
   final controller;
@@ -15,20 +16,22 @@ class MyTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        style: TextStyle(color: Color.fromRGBO(223, 246, 255, 100)),
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Color.fromRGBO(223, 246, 255, 100),
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color.fromRGBO(71, 181, 255, 100))),
-          fillColor: Colors.white,
-          hintText: hintText,
+      child: Container(
+        //margin: EdgeInsets.only(left: 30),
+        child: TextField(
+          controller: controller,
+          obscureText: obscureText,
+          style: TextStyle(color: MyApp.textColor),
+          decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: MyApp.textColor,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyApp.btnColor)),
+              hintText: hintText,
+              hintStyle: TextStyle(color: MyApp.textColor)),
         ),
       ),
     );
