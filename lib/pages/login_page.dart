@@ -1,19 +1,69 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:walletwatch/components/btn.dart';
 import 'package:walletwatch/components/textfield.dart';
 import 'package:walletwatch/main.dart';
 import 'package:walletwatch/pages/register_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final Function()? onTap;
   LoginPage({super.key, required this.onTap});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   //text editing controller
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   //sign in user
-  void signIn() {}
+  void signIn() async {
+    //show loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    //try signin
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      // Successfully signed in
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      // wrong email
+      showErrorMessage(e.code);
+    }
+  }
+
+  //show error message
+
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: Center(
+              child: Text(
+            message,
+            style: const TextStyle(color: Colors.black),
+          )),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +108,8 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 50),
                   MyTextField(
-                    controller: usernameController,
-                    hintText: "Username",
+                    controller: emailController,
+                    hintText: "Email",
                     obscureText: false,
                   ),
                   SizedBox(
