@@ -3,7 +3,13 @@ import 'package:walletwatch/main.dart';
 
 class MyBtn extends StatelessWidget {
   final Function()? onTap;
-  const MyBtn({super.key, required this.onTap});
+  final String text;
+
+  const MyBtn({
+    super.key,
+    required this.onTap,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +22,8 @@ class MyBtn extends StatelessWidget {
             color: MyApp.btnColor, borderRadius: BorderRadius.circular(12)),
         child: Center(
             child: Text(
-          "Sign In",
-          style: TextStyle(
+          text,
+          style: const TextStyle(
               color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
         )),
       ),

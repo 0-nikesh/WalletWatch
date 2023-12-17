@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:walletwatch/components/btn.dart';
 import 'package:walletwatch/components/textfield.dart';
 import 'package:walletwatch/main.dart';
+import 'package:walletwatch/pages/home_page.dart';
 import 'package:walletwatch/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,6 +41,14 @@ class _LoginPageState extends State<LoginPage> {
 
       // Successfully signed in
       Navigator.pop(context);
+      Navigator.pushReplacement(
+        // Replace current screen with the next one
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              HomePage(), // Replace NextScreen with your desired screen
+        ),
+      );
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       // wrong email
@@ -89,7 +98,17 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 80,
+                    height: 20,
+                  ),
+                  Text(
+                    "It's great to have you back!😍",
+                    style: TextStyle(
+                      color: Color.fromRGBO(223, 246, 255, 100),
+                      fontSize: 24,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
                   ),
                   Image.asset(
                     "lib/image/normal.png",
@@ -97,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: 120,
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 25,
                   ),
                   Text(
                     "Control, Track, Grow, With WalletWatch",
@@ -106,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 25),
                   MyTextField(
                     controller: emailController,
                     hintText: "Email",
@@ -135,6 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 20),
                   MyBtn(
+                    text: 'Log in',
                     onTap: signIn,
                   ),
                   SizedBox(
@@ -152,7 +172,9 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => RegisterPage(),
+                              builder: (context) => RegisterPage(
+                                onTap: () {},
+                              ),
                             ),
                           );
                         },

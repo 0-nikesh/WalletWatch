@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:walletwatch/pages/login_page.dart';
+import 'package:walletwatch/pages/loginorRegister.dart';
 
 import 'home_page.dart';
 
@@ -20,7 +20,7 @@ class AuthPage extends StatelessWidget {
 
             //user not logged in
             else {
-              return LoginPage(onTap: () {});
+              return LoginOrRegisterPage();
             }
           }),
     );
