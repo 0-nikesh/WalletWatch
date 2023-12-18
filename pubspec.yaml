@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.24.1
   firebase_auth: ^4.15.2
+  firebase_database: 
+  smooth_page_indicator: 
 
 dev_dependencies:
   flutter_test:
