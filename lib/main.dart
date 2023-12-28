@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:walletwatch/firebase_options.dart';
 import 'package:walletwatch/pages/auth_page.dart';
+import 'package:walletwatch/pages/statistics_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +14,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  //color defination
+
   static const Color textColor = Color.fromRGBO(223, 246, 255, 100);
   static const Color bgColor = Color.fromRGBO(6, 40, 61, 100);
   static const Color btnColor = Color.fromRGBO(71, 181, 255, 100);
@@ -21,9 +22,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      home: const AuthPage(),
+      routes: {
+        '/statistics': (context) => StatisticPage(),
+      },
     );
   }
 }
