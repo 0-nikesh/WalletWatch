@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:walletwatch/firebase_options.dart';
 import 'package:walletwatch/pages/auth_page.dart';
+import 'package:walletwatch/pages/receipts_page.dart';
 import 'package:walletwatch/pages/statistics_page.dart';
+import 'package:walletwatch/pages/transaction_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
       home: const AuthPage(),
       routes: {
         '/statistics': (context) => StatisticPage(),
+        '/transaction': (context) => TransactionPage(),
+        '/receipt': (context) => ReceiptPage(),
       },
     );
   }

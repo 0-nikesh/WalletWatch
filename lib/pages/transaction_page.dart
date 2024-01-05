@@ -5,6 +5,13 @@ class TransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Transaction'),
+      ),
+      body: Center(
+        child: Text('Transaction Page Content'),
+      ),
+    );
   }
 }

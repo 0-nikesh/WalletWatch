@@ -6,8 +6,6 @@ import 'package:walletwatch/components/list.dart';
 import 'package:walletwatch/components/my_card.dart';
 
 import 'login_page.dart';
-import 'receipts_page.dart';
-import 'transaction_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -161,33 +159,24 @@ class _HomePageState extends State<HomePage> {
                   img: Image.asset('lib/image/stat.png'),
                   desc: 'Payment and Income Chart',
                   onTap: () {
-                    print("Statistics onTap called");
                     Navigator.pushNamed(context, '/statistics');
                   }),
 
               List(
-                name: 'Transaction',
-                img: Image.asset('lib/image/cash-flow.png'),
-                desc: 'Transaction History',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TransactionPage()),
-                  );
-                },
-              ),
+                  name: 'Transaction',
+                  img: Image.asset('lib/image/cash-flow.png'),
+                  desc: 'Transaction History',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/transaction');
+                  }),
 
               List(
-                name: 'Reciepts',
-                img: Image.asset('lib/image/bill.png'),
-                desc: 'Bill of transactions',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ReceiptPage()),
-                  );
-                },
-              ),
+                  name: 'Reciepts',
+                  img: Image.asset('lib/image/bill.png'),
+                  desc: 'Bill of transactions',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/receipt');
+                  }),
 
               //column for statistics and transactions
               //
