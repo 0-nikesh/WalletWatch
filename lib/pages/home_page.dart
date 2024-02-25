@@ -2,16 +2,17 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:walletwatch/components/list.dart';
 import 'package:walletwatch/components/my_card.dart';
-import 'package:intl/intl.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:walletwatch/main.dart';
 import 'package:walletwatch/services/firebase_service.dart';
+
 import 'login_page.dart';
-import 'statistics_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -146,6 +147,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
             DatabaseReference transactionsRef =
                 FirebaseDatabase.instance.reference().child('transactions');
             transactionsRef.push().set({
+              'userId': MyApp.currentUser?.uid, // Add the user's ID
               'category': _selectedCategory,
               'cost': _cost,
               'type': _selectedType,
@@ -233,6 +235,11 @@ class _HomePageState extends State<HomePage> {
     try {
       var transactions = await firebaseService.fetchDataFromFirebase();
 
+      // Filter transactions for the logged-in user
+      transactions = transactions
+          .where((transaction) => transaction['userId'] == user?.uid)
+          .toList();
+
       // Calculate total income and total expense
       double income = 0.0;
       double expense = 0.0;
@@ -250,7 +257,6 @@ class _HomePageState extends State<HomePage> {
         totalExpense = expense;
       });
     } catch (error) {
-      print('Error fetching totals: $error');
       print('Error fetching totals: $error');
       // Re-throw the error for higher-level handling
       throw error;

@@ -197,42 +197,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     height: 30,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.3,
-                            color: MyApp.textColor,
-                          ),
-                        ),
-                        Text(
-                          "Or Continue with",
-                          style: TextStyle(color: MyApp.textColor),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.3,
-                            color: MyApp.textColor,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "lib/image/image8-2.webp",
-                        height: 100,
-                        width: 120,
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),

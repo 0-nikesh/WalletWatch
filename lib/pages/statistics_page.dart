@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:walletwatch/main.dart'; // Import your main.dart file to access MyApp.currentUser
 import 'package:walletwatch/services/firebase_service.dart';
 
 class StatisticPage extends StatelessWidget {
@@ -10,10 +11,13 @@ class StatisticPage extends StatelessWidget {
     totalIncome = 0;
     totalExpense = 0;
     transactions.forEach((transaction) {
-      if (transaction['type'] == 'Income' && transaction['cost'] != null) {
+      if (transaction['type'] == 'Income' &&
+          transaction['cost'] != null &&
+          transaction['userId'] == MyApp.currentUser?.uid) {
         totalIncome += transaction['cost'];
       } else if (transaction['type'] == 'Expense' &&
-          transaction['cost'] != null) {
+          transaction['cost'] != null &&
+          transaction['userId'] == MyApp.currentUser?.uid) {
         totalExpense += transaction['cost'];
       }
     });

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:walletwatch/main.dart'; // Import your main.dart file to access MyApp.currentUser
 import 'package:walletwatch/services/firebase_service.dart';
 
 class TransactionPage extends StatelessWidget {
@@ -19,6 +20,12 @@ class TransactionPage extends StatelessWidget {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             List<Map<String, dynamic>> transactions = snapshot.data!;
+
+            // Filter transactions based on user ID
+            transactions = transactions
+                .where((transaction) =>
+                    transaction['userId'] == MyApp.currentUser?.uid)
+                .toList();
 
             // Sort transactions based on dateTime field
             transactions.sort((a, b) {

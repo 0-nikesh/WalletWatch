@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final passwordController = TextEditingController();
 
-  //sign in user
+  //show error message
   void signIn() async {
     //show loading circle
     showDialog(
@@ -34,12 +34,20 @@ class _LoginPageState extends State<LoginPage> {
 
     //try signin
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
 
       // Successfully signed in
+      User? user = userCredential.user;
+      if (user != null) {
+        // Store user information
+        MyApp.currentUser = user;
+        print('Currently logged-in user: ${MyApp.currentUser?.email}');
+      }
+
       Navigator.pop(context);
       Navigator.pushReplacement(
         // Replace current screen with the next one
@@ -55,8 +63,6 @@ class _LoginPageState extends State<LoginPage> {
       showErrorMessage(e.code);
     }
   }
-
-  //show error message
 
   void showErrorMessage(String message) {
     showDialog(
@@ -188,41 +194,8 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 30,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.3,
-                            color: MyApp.textColor,
-                          ),
-                        ),
-                        Text(
-                          "Or Continue with",
-                          style: TextStyle(color: MyApp.textColor),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.3,
-                            color: MyApp.textColor,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
                   SizedBox(
                     height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "lib/image/image8-2.webp",
-                        height: 100,
-                        width: 120,
-                      ),
-                    ],
                   ),
                 ],
               ),
