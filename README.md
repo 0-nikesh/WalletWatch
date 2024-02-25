@@ -1,6 +1,6 @@
 # walletwatch
 
-#dependencies to add :
+# dependencies to add :
   cupertino_icons: ^1.0.2
   firebase_core: ^2.24.1
   firebase_auth: ^4.15.2
