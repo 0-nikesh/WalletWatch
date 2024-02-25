@@ -1,4 +1,4 @@
-# walletwatch
+# WalletWatch (expense tracker)
 
 # dependencies to add :
   cupertino_icons: ^1.0.2
